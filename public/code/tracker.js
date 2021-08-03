@@ -1,39 +1,37 @@
-fetchData()
-async function fetchData () {
-
+fetchData();
+async function fetchData() {
   // Use fetch to get data from /api
-  const response = await fetch('/api')
-  const data = await response.json()
+  const response = await fetch("/api");
+  const data = await response.json();
 
-  console.log(data)
-  let counter = 0
-  data.forEach(item => {
-    counter++
-    const container = document.createElement('div')
-    container.classList.add('entry')
+  console.log(data);
+  let counter = 0;
+  data.forEach((item) => {
+    counter++;
+    const container = document.createElement("div");
+    container.classList.add("entry");
 
+    let airText;
+    let airClass;
 
-    let airText
-    let airClass 
-
-    if(item.air < 51){
-      airText = 'Good'
-      airClass = 'aq1'
-    }else if(item.air > 50 && item.air < 101){
-      airText = 'Moderate'
-      airClass = 'aq2'
-    }else if(item.air > 100 && item.air < 151){
-      airText = 'Unhealthy for Sensitive Groups'
-      airClass = 'aq3'
-    }else if(item.air > 150 && item.air < 201){
-      airText = 'Unhealthy'
-      airClass = 'aq4'
-    }else if(item.air > 200 && item.air < 301){
-      airText = 'Very Unhealthy'
-      airClass = 'aq5'
-    }else if(item.air > 300){
-      airText = 'Hazardous'
-      airClass = 'aq6'
+    if (item.air < 51) {
+      airText = "Good";
+      airClass = "aq1";
+    } else if (item.air > 50 && item.air < 101) {
+      airText = "Moderate";
+      airClass = "aq2";
+    } else if (item.air > 100 && item.air < 151) {
+      airText = "Unhealthy for Sensitive Groups";
+      airClass = "aq3";
+    } else if (item.air > 150 && item.air < 201) {
+      airText = "Unhealthy";
+      airClass = "aq4";
+    } else if (item.air > 200 && item.air < 301) {
+      airText = "Very Unhealthy";
+      airClass = "aq5";
+    } else if (item.air > 300) {
+      airText = "Hazardous";
+      airClass = "aq6";
     }
 
     container.innerHTML = `
@@ -41,7 +39,9 @@ async function fetchData () {
       <p class="counter">${counter}</p>
       <p class="date">${new Date(item.timestamp).toLocaleString()}</p>
       <p class="mood">${item.mood_info.mood}</p>
-      <div class="face_container"><img class="face" src="${item.mood_info.face}" alt="Picure of a mood"></div>
+      <div class="face_container"><img class="face" src="${
+        item.mood_info.face
+      }" alt="Picure of a mood"></div>
       <div class="more_info">
         <div class="weatherDis" >
           <i class="fas fa-thermometer-empty"></i>
@@ -52,7 +52,9 @@ async function fetchData () {
         </div>
         <div>
           <i class="fas fa-map-marker-alt"></i>
-          <p class="location" title="${item.location.latitude}°, ${item.location.longitude}°" >${item.location.city}</p>
+          <p class="location" title="${item.location.latitude}°, ${
+      item.location.longitude
+    }°" >${item.location.city}</p>
         </div>
         <div class="airDis" >
           <div><i class="fas fa-wind"></i></div>
@@ -64,8 +66,8 @@ async function fetchData () {
         </div>
       </div>
     </section>
-    `
+    `;
 
-    document.querySelector('main').append(container)
+    document.querySelector("main").append(container);
   });
 }
